@@ -16,7 +16,7 @@ string Getusuario(void);
 string Getpassword(void);
 
 
-Private:
+private:
 string usuario;
 string password; 
 };
