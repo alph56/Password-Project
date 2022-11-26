@@ -1,13 +1,14 @@
 #ifndef NODO_H
 #define NODO_H
 #include <iostream>
+#include "Credencial.h"
 using namespace std;
 
 class Nodo{
    public:
    Nodo();
-   Nodo();
-   int dato;
+   Nodo(Credencial,Nodo*);
+   Credencial dato;
    Nodo*Next;
 };
 
