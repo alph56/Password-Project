@@ -7,5 +7,7 @@ Nodo::Nodo(Credencial dato,Nodo*Next){
 
 Nodo::Nodo(){
   dato.dominio=" ";
+  dato.SetUsuario(" ");
+  dato.SetUsuario(" ");
   Next=nullptr;
 }
