@@ -12,6 +12,8 @@ Nodo*head;
 Nodo *tail;
 void Append(Credencial);
 void Tofile(Credencial);
+void MostrarTodo(void);
+void MostrarTodoP(void);
 };
 
 #endif//LISTA_H
