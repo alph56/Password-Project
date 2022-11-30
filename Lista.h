@@ -12,6 +12,8 @@ Nodo*head;
 
 void Append(Credencial);
 void Tofile(void);
+void BuscarFile(string);
+void BuscarList(string);
 void MostrarTodo(void);
 void MostrarTodoP(void);
 

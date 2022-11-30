@@ -11,7 +11,6 @@ int main() {
   c1.Setpassword(b);
   c1.SetUsuario(a);
   list->Append(c1);
-  //list->MostrarTodoP();
 
   c1.dominio="www.epicgames.com";
   string c="newplayer01";

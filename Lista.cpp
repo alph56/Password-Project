@@ -31,7 +31,7 @@ void Lista::Tofile(void){
     cout<<"No hay elementos para agregar en archivo txt"<<endl;
   else{
     Nodo*aux=head;
-    fstream fp;
+    ofstream fp;
     fp.open("my_file.txt", ios::out);
     if (!fp) {
       cout << "File not created!"<<endl;
@@ -71,3 +71,58 @@ void Lista::MostrarTodoP(void){
   }
 }
 
+void Lista::BuscarFile(string busquedab){
+  if(!head)
+    cout<<"Lista vacia"<<endl;
+  else{
+    ifstream leer;
+    Nodo*aux=head;
+    leer.open("my_file.txt");
+     if (!leer) {
+      cout << "File not created!"<<endl;
+      }
+    else {
+      bool band=false;
+      while(aux and !leer.eof() and band==false){
+        leer>>aux->dato.dominio;
+        if(aux->dato.dominio==busquedab){
+          band=true;
+          cout<<"Nombre del sitio encontrado!!!"<<endl;
+          cout<<"Dominio: "<<aux->dato.dominio<<endl;
+          cout<<"Usuario: ----"<<endl;
+          cout<<"Password: ----\n"<<endl;
+        }
+        else{
+          aux=aux->Next;
+        }
+      }
+      if(band==false)
+        cout<<"Dato No Encontrado!!!"<<endl;
+    }
+    leer.close();
+  }
+}
+
+
+void Lista::BuscarList(string busqueda){
+    if(!head)
+        cout<<"Lista vacia"<<endl;
+    else{
+      Nodo*tmp=head;
+      bool band=true;
+      while(tmp and band){
+        if(tmp->dato.dominio==busqueda){
+          band=false;
+          cout<<"Nombre del sitio encontrado!!!"<<endl;
+          cout<<"Dominio: "<<tmp->dato.dominio<<endl;
+          cout<<"Usuario: ----"<<endl;
+          cout<<"Password: ----\n"<<endl;
+        }
+        else{
+          tmp=tmp->Next;
+        }
+      }
+      if(!tmp)
+        cout<<"Dato No Encontrado!!!"<<endl;
+    } 
+}
