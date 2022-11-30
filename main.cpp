@@ -11,8 +11,14 @@ int main() {
   c1.Setpassword(b);
   c1.SetUsuario(a);
   list->Append(c1);
-  list->MostrarTodo();
-  list->Tofile(c1);
-  
-  cout << "Hello World!\n";
+  //list->MostrarTodoP();
+
+  c1.dominio="www.epicgames.com";
+  string c="newplayer01";
+  string d="contrasena132";
+  c1.Setpassword(d);
+  c1.SetUsuario(c);
+  list->Append(c1);
+  list->MostrarTodoP();
+  list->Tofile();
 }
