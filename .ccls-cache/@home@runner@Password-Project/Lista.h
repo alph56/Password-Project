@@ -10,8 +10,9 @@ Lista();
 Lista(Nodo*nextPos);
 Nodo*head;
 
-void Append(Credencial);
+void AppendL(Credencial);
 void Tofile(void);
+void LeerFile(void);
 void BuscarFile(string);
 void BuscarList(string);
 void MostrarTodo(void);

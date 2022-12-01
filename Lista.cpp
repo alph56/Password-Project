@@ -11,7 +11,7 @@ Lista::Lista(){
   head=nullptr;
 }
 
-void Lista::Append(Credencial c1){
+void Lista::AppendL(Credencial c1){
   Nodo*aux=new Nodo(c1,nullptr);
   if(!head){
     head=aux;
@@ -117,41 +117,66 @@ void Lista::MostrarTodoP(void){
   }
 }
 
-/*void Lista::BuscarFile(string busquedab){
-  if(!head)
-    cout<<"Lista vacia"<<endl;
-  else{
-    ifstream fp;
-    Nodo*aux=head;
-    fp.open("my_file.txt");
-    fp>>aux->dato.dominio;
-     if (!fp) {
+/*void Lista::LeerFile(void){
+  ofstream fp("my_file.txt", ios::out | ios::binary);
+  ifstream fpleer("my_file.txt", ios::in | ios::binary);
+  if (!fp) {
       cout << "File not created!"<<endl;
+      exit(1);
       }
-    else {
-      bool band=false;
-      while(!fp.eof() and band==false){
-      while(aux){
-        fp>>aux->dato.dominio;
-        if(aux->dato.dominio==busquedab){
-          band=true;
-          cout<<"Nombre del sitio encontrado!!!"<<endl;
-          cout<<"Dominio: "<<aux->dato.dominio<<endl;
-          cout<<"Usuario: ----"<<endl;
-          cout<<"Password: ----\n"<<endl;
-          fp>>aux->dato.dominio;
-        }
-        else{
-          aux=aux->Next;
-        }
+  else{
+    if(!head)
+      cout<<"Lista vacia"<<endl;
+    else{
+      char *buf;
+      Credencial help;
+      Nodo*aux=head;
+      while(!fp.eof() and aux){
+        //SIZE1
+        help.dominio=aux->dato.dominio;
+        int size1=(help.dominio.size());
+        //SIZE2
+        help.SetUsuario(aux->dato.Getusuario());
+        int size2=(help.Getusuario().size());
+        //SIZE3
+        help.Setpassword(aux->dato.Getpassword());
+        int size3=(help.Getpassword().size());
+        
+        fpleer.read(reinterpret_cast<char *>(&size1), sizeof(int));
+        buf = new char[size1];
+        fpleer.read( buf, size1);
+        help.dominio= "";
+        help.dominio.append(buf, size1);
+       } 
+     }
+   }
+}*
+
+void Lista::BuscarFile(string busquedab){
+  ofstream fp;
+  ifstream fpleer;
+  if (!fp) {
+      cout << "File not created!"<<endl;
+      exit(1);
       }
+  else{
+    char *buf;
+    Credencial help;
+    Nodo*aux=head;
+    while(!fp.eof()){
+        //SIZE1
+        help.dominio=aux->dato.dominio;
+        int size1=(help.dominio.size());
+        //SIZE2
+        help.SetUsuario(aux->dato.Getusuario());
+        int size2=(help.Getusuario().size());
+        //SIZE3
+        help.Setpassword(aux->dato.Getpassword());
+        int size3=(help.Getpassword().size());
     }
-      if(band==false)
-        cout<<"Dato No Encontrado!!!"<<endl;
-    }
-    fp.close();
   }
-}*/
+  fp.close();
+}
 
 
 void Lista::BuscarList(string busqueda){
