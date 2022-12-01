@@ -24,4 +24,7 @@ int main() {
   list->BuscarList(f);
   list->Eliminar(f);
   list->MostrarTodoP();
+
+  //list->EliminarTodo();
+  //list->MostrarTodoP();
 }

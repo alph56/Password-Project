@@ -311,12 +311,45 @@ void Lista::EliminarTodo(void){
   if(!head)
     cout<<"Lista vacía"<<endl;
   else{
-    Nodo*aux;
+    Nodo*tmp=head;
+    Credencial help;
+    char *buf;
+    ifstream fpleer("my_file.txt", ios::in | ios::binary);
+    ofstream fp("my_file.txt", ios::out | ios::binary);
     while(head){
-      aux=head;
-      head=head->Next;
-      delete aux;
+         tmp=head;
+         //SIZE1
+          help.dominio=tmp->dato.dominio;
+          int size1=(help.dominio.size());
+          //SIZE2
+          help.SetUsuario(tmp->dato.Getusuario());
+          int size2=(help.Getusuario().size());
+          //SIZE3
+          help.Setpassword(tmp->dato.Getpassword());
+          int size3=(help.Getpassword().size());
+
+         fpleer.read(reinterpret_cast<char *>(&size1), sizeof(int));
+         buf = new char[size1];
+         fpleer.read( buf, size1);
+         help.dominio= "";
+         help.dominio.append(buf, size1);
+
+         fpleer.read(reinterpret_cast<char *>(&size2), sizeof(int));
+         buf = new char[size2];
+         fpleer.read( buf, size2);
+         help.Getpassword()= "";
+         help.Getpassword().append(buf, size2);
+
+         fpleer.read(reinterpret_cast<char *>(&size3), sizeof(int));
+         buf = new char[size3];
+         fpleer.read( buf, size3);
+         help.Getusuario()= "";
+         help.Getusuario().append(buf, size3);
+      
+         head=head->Next;
+         delete tmp;
     }
     cout<<"Lista eliminada con exito"<<endl;
+    Tofile();
   }
 }
