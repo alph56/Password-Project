@@ -31,10 +31,56 @@ void Lista::Tofile(void){
     cout<<"No hay elementos para agregar en archivo txt"<<endl;
   else{
     Nodo*aux=head;
-    ofstream fp;
-    fp.open("my_file.txt", ios::out);
+    Credencial help;
+    char*buf;
+    ofstream fp("my_file.txt", ios::out | ios::binary);
     if (!fp) {
       cout << "File not created!"<<endl;
+      exit(1);
+      }
+    else {
+      cout << "File created successfully!\n";
+      while(aux){
+        //SIZE1
+        help.dominio=aux->dato.dominio;
+        int size1=(help.dominio.size());
+        //SIZE2
+        help.SetUsuario(aux->dato.Getusuario());
+        int size2=(help.Getusuario().size());
+        //SIZE3
+        help.Setpassword(aux->dato.Getpassword());
+        int size3=(help.Getpassword().size());
+
+        //WRITING ON TXT
+        //SIZE1
+        fp.write(reinterpret_cast<char *>(&size1), sizeof(int));
+        fp.write(help.dominio.c_str(), size1);
+        //SIZE2
+        fp.write(reinterpret_cast<char *>(&size2), sizeof(int));
+        fp.write(help.Getusuario().c_str(), size2);
+        //SIZE3
+        fp.write(reinterpret_cast<char *>(&size3), sizeof(int));
+        fp.write(help.Getpassword().c_str(), size3);
+        //CAMBIO DE NODO
+        aux=aux->Next;
+        }
+     }
+     fp.flush();
+     fp.close();
+  }
+}
+
+/*void Lista::Tofile(void){
+  if(!head)
+    cout<<"No hay elementos para agregar en archivo txt"<<endl;
+  else{
+    Nodo*aux=head;
+    ofstream fp;
+    //char *buf;
+    fp.open("my_file.txt", ios::out|ios::binary);
+    if (!fp) {
+      cout << "File not created!"<<endl;
+      exit(1);
       }
     else {
       cout << "File created successfully!\n";
@@ -45,7 +91,7 @@ void Lista::Tofile(void){
      }
      fp.close();
   }
-}
+}*/
 
 void Lista::MostrarTodo(void){
   if(!head)
@@ -71,37 +117,41 @@ void Lista::MostrarTodoP(void){
   }
 }
 
-void Lista::BuscarFile(string busquedab){
+/*void Lista::BuscarFile(string busquedab){
   if(!head)
     cout<<"Lista vacia"<<endl;
   else{
-    ifstream leer;
+    ifstream fp;
     Nodo*aux=head;
-    leer.open("my_file.txt");
-     if (!leer) {
+    fp.open("my_file.txt");
+    fp>>aux->dato.dominio;
+     if (!fp) {
       cout << "File not created!"<<endl;
       }
     else {
       bool band=false;
-      while(aux and !leer.eof() and band==false){
-        leer>>aux->dato.dominio;
+      while(!fp.eof() and band==false){
+      while(aux){
+        fp>>aux->dato.dominio;
         if(aux->dato.dominio==busquedab){
           band=true;
           cout<<"Nombre del sitio encontrado!!!"<<endl;
           cout<<"Dominio: "<<aux->dato.dominio<<endl;
           cout<<"Usuario: ----"<<endl;
           cout<<"Password: ----\n"<<endl;
+          fp>>aux->dato.dominio;
         }
         else{
           aux=aux->Next;
         }
       }
+    }
       if(band==false)
         cout<<"Dato No Encontrado!!!"<<endl;
     }
-    leer.close();
+    fp.close();
   }
-}
+}*/
 
 
 void Lista::BuscarList(string busqueda){
@@ -113,7 +163,7 @@ void Lista::BuscarList(string busqueda){
       while(tmp and band){
         if(tmp->dato.dominio==busqueda){
           band=false;
-          cout<<"Nombre del sitio encontrado!!!"<<endl;
+          cout<<"\nNombre del sitio encontrado!!!"<<endl;
           cout<<"Dominio: "<<tmp->dato.dominio<<endl;
           cout<<"Usuario: ----"<<endl;
           cout<<"Password: ----\n"<<endl;

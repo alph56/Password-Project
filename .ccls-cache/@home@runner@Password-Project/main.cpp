@@ -20,4 +20,6 @@ int main() {
   list->Append(c1);
   list->MostrarTodoP();
   list->Tofile();
+  string f="www.google.com";
+  list->BuscarList(f);
 }
