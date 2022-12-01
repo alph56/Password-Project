@@ -6,14 +6,15 @@ using namespace std;
 
 class GenPass {
 private:
-	string password;
+	string contrasenhia;
 public:
 
 	GenPass();
-	void setpassword(string);
-	string getpassword(void);
+	void setcontrasenhia(string);
+	string getcontrasenhia(void);
 
 	void Manual(string);
+	void RandomPass(int);
 };
 
 #endif

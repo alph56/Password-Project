@@ -1,21 +1,39 @@
-#include "GenPass.h"
-#include <stdlib.h>
+#include"GenPass.h"
+#include<cstdlib>
+#include<ctime>
+#include<string>
+
+using namespace std;
 
 GenPass::GenPass() {
-	password = "Unknown";
+	contrasenhia = "Unknown";
 }
 
-void GenPass::setpassword(string password) {
-	this->password = password;
+void GenPass::setcontrasenhia(string contrasenhia) {
+	this->contrasenhia = contrasenhia;
 }
-string GenPass::getpassword(void) {
-	return password;
+string GenPass::getcontrasenhia(void) {
+	return contrasenhia;
 }
 
-void GenPass::Manual(string password) {
-	string password;
+void GenPass::Manual(string contra) {
+	string contra;
 	cout << "Ingrese su nueva contrasena: ";
 	fflush(stdin);
-	cin >> password;
-	setpassword(password);
+	cin >> contra;
+	setcontrasenhia(contra);
+}
+
+void GenPass::RandomPass(int lenght) {
+	static const char alphanum[] = "1234567890!#$%&*+@~_ABCDEFGHIJKLNMOPQRSTUVWXYZ-abcdefghijklmnopqrstuvwxyz;
+	int string_lenght = sizeof(alphanum);
+	int tam;
+	srand(time(0));
+	cout << "Ingresa el tamano de la contrasena: ";
+	fflush(stdin);
+	cin >> tam;
+	cout << "Contrasena generada: ";
+	for (int i = 0; i < lenght; i++) {
+		cout << alphanum[rand() % string_lenght]
+	}
 }
