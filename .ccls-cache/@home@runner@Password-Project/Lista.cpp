@@ -239,3 +239,84 @@ void Lista::BuscarList(string busqueda){
       Tofile();
   }
 }
+
+void Lista::Eliminar(string eliminar){
+	if(!head)
+        cout<<"Lista vacia"<<endl;
+    else{
+      Nodo *tmp=head;
+      Nodo *tmpAnt;
+      Credencial help;
+      char *buf;
+      bool band=true;
+      ifstream fpleer("my_file.txt", ios::in | ios::binary);
+      ofstream fp("my_file.txt", ios::out | ios::binary);
+        while(tmp and band){
+           //SIZE1
+          help.dominio=tmp->dato.dominio;
+          int size1=(help.dominio.size());
+          //SIZE2
+          help.SetUsuario(tmp->dato.Getusuario());
+          int size2=(help.Getusuario().size());
+          //SIZE3
+          help.Setpassword(tmp->dato.Getpassword());
+          int size3=(help.Getpassword().size());
+
+         fpleer.read(reinterpret_cast<char *>(&size1), sizeof(int));
+         buf = new char[size1];
+         fpleer.read( buf, size1);
+         help.dominio= "";
+         help.dominio.append(buf, size1);
+
+         fpleer.read(reinterpret_cast<char *>(&size2), sizeof(int));
+         buf = new char[size2];
+         fpleer.read( buf, size2);
+         help.Getpassword()= "";
+         help.Getpassword().append(buf, size2);
+
+         fpleer.read(reinterpret_cast<char *>(&size3), sizeof(int));
+         buf = new char[size3];
+         fpleer.read( buf, size3);
+         help.Getusuario()= "";
+         help.Getusuario().append(buf, size3);
+            if(tmp->dato.dominio==eliminar){
+                band=false;
+            }
+            else{
+                tmpAnt=tmp;
+                tmp=tmp->Next;
+            }
+        }
+
+    if (tmp==nullptr){
+			cout<<"Dato No Encontrado"<<endl;
+		}
+		else if(tmp==head){
+			head=head->Next;
+			delete tmp;
+		}
+		else if(tmp->Next==nullptr){
+			tmpAnt->Next=nullptr;
+			delete tmp;
+		}
+		else{
+			tmpAnt->Next=tmp->Next;
+			delete tmp;
+		}
+      Tofile();
+  }
+}
+
+void Lista::EliminarTodo(void){
+  if(!head)
+    cout<<"Lista vacía"<<endl;
+  else{
+    Nodo*aux;
+    while(head){
+      aux=head;
+      head=head->Next;
+      delete aux;
+    }
+    cout<<"Lista eliminada con exito"<<endl;
+  }
+}

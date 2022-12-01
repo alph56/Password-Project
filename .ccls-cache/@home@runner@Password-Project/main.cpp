@@ -20,7 +20,8 @@ int main() {
   list->AppendL(c1);
   list->MostrarTodoP();
   list->Tofile();
-  string f="ww.google.com";
+  string f="www.google.com";
   list->BuscarList(f);
-  //list->BuscarFile(f);
+  list->Eliminar(f);
+  list->MostrarTodoP();
 }

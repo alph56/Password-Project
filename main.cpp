@@ -22,5 +22,6 @@ int main() {
   list->Tofile();
   string f="www.google.com";
   list->BuscarList(f);
-  //list->BuscarFile(f);
+  list->Eliminar(f);
+  list->MostrarTodoP();
 }
