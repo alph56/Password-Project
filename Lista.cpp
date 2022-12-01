@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <string.h>
 #include "Lista.h"
 using namespace std;
 
@@ -39,7 +40,7 @@ void Lista::Tofile(void){
       exit(1);
       }
     else {
-      cout << "File created successfully!\n";
+      //cout << "File created successfully!\n";
       while(aux){
         //SIZE1
         help.dominio=aux->dato.dominio;
@@ -117,7 +118,7 @@ void Lista::MostrarTodoP(void){
   }
 }
 
-/*void Lista::LeerFile(void){
+/*void Lista::BuscarFile(string busquedab){
   ofstream fp("my_file.txt", ios::out | ios::binary);
   ifstream fpleer("my_file.txt", ios::in | ios::binary);
   if (!fp) {
@@ -125,58 +126,56 @@ void Lista::MostrarTodoP(void){
       exit(1);
       }
   else{
-    if(!head)
-      cout<<"Lista vacia"<<endl;
-    else{
-      char *buf;
-      Credencial help;
-      Nodo*aux=head;
-      while(!fp.eof() and aux){
-        //SIZE1
-        help.dominio=aux->dato.dominio;
-        int size1=(help.dominio.size());
-        //SIZE2
-        help.SetUsuario(aux->dato.Getusuario());
-        int size2=(help.Getusuario().size());
-        //SIZE3
-        help.Setpassword(aux->dato.Getpassword());
-        int size3=(help.Getpassword().size());
-        
-        fpleer.read(reinterpret_cast<char *>(&size1), sizeof(int));
-        buf = new char[size1];
-        fpleer.read( buf, size1);
-        help.dominio= "";
-        help.dominio.append(buf, size1);
-       } 
-     }
-   }
-}*
-
-void Lista::BuscarFile(string busquedab){
-  ofstream fp;
-  ifstream fpleer;
-  if (!fp) {
-      cout << "File not created!"<<endl;
-      exit(1);
-      }
-  else{
     char *buf;
     Credencial help;
+    bool band=false;
     Nodo*aux=head;
     while(!fp.eof()){
-        //SIZE1
-        help.dominio=aux->dato.dominio;
-        int size1=(help.dominio.size());
-        //SIZE2
-        help.SetUsuario(aux->dato.Getusuario());
-        int size2=(help.Getusuario().size());
-        //SIZE3
-        help.Setpassword(aux->dato.Getpassword());
-        int size3=(help.Getpassword().size());
+      //SIZE1
+      help.dominio=aux->dato.dominio;
+      int size1=(help.dominio.size());
+      //SIZE2
+      help.SetUsuario(aux->dato.Getusuario());
+      int size2=(help.Getusuario().size());
+      //SIZE3
+      help.Setpassword(aux->dato.Getpassword());
+      int size3=(help.Getpassword().size());
+
+      fpleer.read(reinterpret_cast<char *>(&size1), sizeof(int));
+      buf = new char[size1];
+      fpleer.read( buf, size1);
+      help.dominio= "";
+      help.dominio.append(buf, size1);
+
+      fpleer.read(reinterpret_cast<char *>(&size2), sizeof(int));
+      buf = new char[size2];
+      fpleer.read( buf, size2);
+      help.Getpassword()= "";
+      help.Getpassword().append(buf, size2);
+
+      fpleer.read(reinterpret_cast<char *>(&size3), sizeof(int));
+      buf = new char[size3];
+      fpleer.read( buf, size3);
+      help.Getusuario()= "";
+      help.Getusuario().append(buf, size3);
+
+      fpleer>>help.dominio;
+      if(busquedab==help.dominio){
+        band=true;
+        cout<<help.dominio<<endl;
+        cout<<help.Getusuario();
+        cout<<help.Getpassword();
+      }
+      else{
+        aux=aux->Next;
+      }
+    }
+    if(band==false){
+        cout<<"Dato No encontrado"<<endl;
     }
   }
   fp.close();
-}
+}*/
 
 
 void Lista::BuscarList(string busqueda){
@@ -185,13 +184,50 @@ void Lista::BuscarList(string busqueda){
     else{
       Nodo*tmp=head;
       bool band=true;
+      Credencial help;
+      char *buf;
+      ifstream fpleer("my_file.txt", ios::in | ios::binary);
+      ofstream fp("my_file.txt", ios::out | ios::binary);
+      if (!fp) {
+      cout << "File not created!"<<endl;
+      exit(1);
+      }
+      else{
       while(tmp and band){
+        //SIZE1
+          help.dominio=tmp->dato.dominio;
+          int size1=(help.dominio.size());
+          //SIZE2
+          help.SetUsuario(tmp->dato.Getusuario());
+          int size2=(help.Getusuario().size());
+          //SIZE3
+          help.Setpassword(tmp->dato.Getpassword());
+          int size3=(help.Getpassword().size());
+
+         fpleer.read(reinterpret_cast<char *>(&size1), sizeof(int));
+         buf = new char[size1];
+         fpleer.read( buf, size1);
+         help.dominio= "";
+         help.dominio.append(buf, size1);
+
+         fpleer.read(reinterpret_cast<char *>(&size2), sizeof(int));
+         buf = new char[size2];
+         fpleer.read( buf, size2);
+         help.Getpassword()= "";
+         help.Getpassword().append(buf, size2);
+
+         fpleer.read(reinterpret_cast<char *>(&size3), sizeof(int));
+         buf = new char[size3];
+         fpleer.read( buf, size3);
+         help.Getusuario()= "";
+         help.Getusuario().append(buf, size3);
+        
         if(tmp->dato.dominio==busqueda){
           band=false;
           cout<<"\nNombre del sitio encontrado!!!"<<endl;
           cout<<"Dominio: "<<tmp->dato.dominio<<endl;
-          cout<<"Usuario: ----"<<endl;
-          cout<<"Password: ----\n"<<endl;
+          cout<<"Usuario: "<<help.Getusuario()<<endl;
+          cout<<"Password: "<<help.Getpassword()<<endl;
         }
         else{
           tmp=tmp->Next;
@@ -199,5 +235,7 @@ void Lista::BuscarList(string busqueda){
       }
       if(!tmp)
         cout<<"Dato No Encontrado!!!"<<endl;
-    } 
+    }
+      Tofile();
+  }
 }
