@@ -353,3 +353,181 @@ void Lista::EliminarTodo(void){
     Tofile();
   }
 }
+
+void Lista::ModificarDom(string busqueda,Credencial change){
+  if(!head)
+    cout<<"Lista vacía"<<endl;
+  else{
+    Nodo*tmp=head;
+    bool band=true;
+    Credencial help;
+    char *buf;
+    ifstream fpleer("my_file.txt", ios::in | ios::binary);
+    ofstream fp("my_file.txt", ios::out | ios::binary);
+    
+    while(tmp and band){
+          //SIZE1
+          help.dominio=tmp->dato.dominio;
+          int size1=(help.dominio.size());
+          //SIZE2
+          help.SetUsuario(tmp->dato.Getusuario());
+          int size2=(help.Getusuario().size());
+          //SIZE3
+          help.Setpassword(tmp->dato.Getpassword());
+          int size3=(help.Getpassword().size());
+
+         fpleer.read(reinterpret_cast<char *>(&size1), sizeof(int));
+         buf = new char[size1];
+         fpleer.read( buf, size1);
+         help.dominio= "";
+         help.dominio.append(buf, size1);
+
+         fpleer.read(reinterpret_cast<char *>(&size2), sizeof(int));
+         buf = new char[size2];
+         fpleer.read( buf, size2);
+         help.Getpassword()= "";
+         help.Getpassword().append(buf, size2);
+
+         fpleer.read(reinterpret_cast<char *>(&size3), sizeof(int));
+         buf = new char[size3];
+         fpleer.read( buf, size3);
+         help.Getusuario()= "";
+         help.Getusuario().append(buf, size3);
+
+      if(tmp->dato.dominio==busqueda){
+        band=false;
+        cout<<"\nDato Encontrado!!\n"<<endl;
+        cout<<"Dominio: "<<tmp->dato.dominio<<endl;
+        tmp->dato.dominio=change.dominio;
+        cout<<"\nDato Modificado!!\n"<<endl;
+         cout<<"---->Dominio: "<<tmp->dato.dominio<<endl;
+      }
+      else{
+        tmp=tmp->Next;
+      }
+    }
+    if(!tmp){
+     cout<<"\nEse Titulo NO Existe!!\n"<<endl;      
+    }
+    Tofile();
+  }
+}
+
+void Lista::ModificarUsuar(string busqueda,Credencial change){
+  if(!head)
+    cout<<"Lista vacía"<<endl;
+  else{
+    Nodo*tmp=head;
+    bool band=true;
+    Credencial help;
+    char *buf;
+    ifstream fpleer("my_file.txt", ios::in | ios::binary);
+    ofstream fp("my_file.txt", ios::out | ios::binary);
+    while(tmp and band){
+          //SIZE1
+          help.dominio=tmp->dato.dominio;
+          int size1=(help.dominio.size());
+          //SIZE2
+          help.SetUsuario(tmp->dato.Getusuario());
+          int size2=(help.Getusuario().size());
+          //SIZE3
+          help.Setpassword(tmp->dato.Getpassword());
+          int size3=(help.Getpassword().size());
+
+         fpleer.read(reinterpret_cast<char *>(&size1), sizeof(int));
+         buf = new char[size1];
+         fpleer.read( buf, size1);
+         help.dominio= "";
+         help.dominio.append(buf, size1);
+
+         fpleer.read(reinterpret_cast<char *>(&size2), sizeof(int));
+         buf = new char[size2];
+         fpleer.read( buf, size2);
+         help.Getpassword()= "";
+         help.Getpassword().append(buf, size2);
+
+         fpleer.read(reinterpret_cast<char *>(&size3), sizeof(int));
+         buf = new char[size3];
+         fpleer.read( buf, size3);
+         help.Getusuario()= "";
+         help.Getusuario().append(buf, size3);
+
+      if(tmp->dato.dominio==busqueda){
+        band=false;
+        cout<<"\nDato Encontrado!!\n"<<endl;
+        cout<<"Dominio: "<<tmp->dato.dominio<<endl;
+        cout<<"Usuario: "<<tmp->dato.Getusuario()<<endl;
+        tmp->dato.SetUsuario(change.Getusuario());
+        cout<<"\nDato Modificado!!\n"<<endl;
+        cout<<"Dominio: "<<tmp->dato.dominio<<endl;
+        cout<<"---->Usuario: "<<tmp->dato.Getusuario()<<endl;
+      }
+      else{
+        tmp=tmp->Next;
+      }
+    }
+     if(!tmp){
+     cout<<"\nEse Titulo NO Existe!!\n"<<endl;      
+    }
+    Tofile();
+  }
+}
+
+void Lista::ModificarPass(string busqueda,Credencial change){
+  if(!head)
+    cout<<"Lista vacía"<<endl;
+  else{
+    Nodo*tmp=head;
+    bool band=true;
+    Credencial help;
+    char *buf;
+    ifstream fpleer("my_file.txt", ios::in | ios::binary);
+    ofstream fp("my_file.txt", ios::out | ios::binary);
+    while(tmp and band){
+          //SIZE1
+          help.dominio=tmp->dato.dominio;
+          int size1=(help.dominio.size());
+          //SIZE2
+          help.SetUsuario(tmp->dato.Getusuario());
+          int size2=(help.Getusuario().size());
+          //SIZE3
+          help.Setpassword(tmp->dato.Getpassword());
+          int size3=(help.Getpassword().size());
+
+         fpleer.read(reinterpret_cast<char *>(&size1), sizeof(int));
+         buf = new char[size1];
+         fpleer.read( buf, size1);
+         help.dominio= "";
+         help.dominio.append(buf, size1);
+
+         fpleer.read(reinterpret_cast<char *>(&size2), sizeof(int));
+         buf = new char[size2];
+         fpleer.read( buf, size2);
+         help.Getpassword()= "";
+         help.Getpassword().append(buf, size2);
+
+         fpleer.read(reinterpret_cast<char *>(&size3), sizeof(int));
+         buf = new char[size3];
+         fpleer.read( buf, size3);
+         help.Getusuario()= "";
+         help.Getusuario().append(buf, size3);
+
+      if(tmp->dato.dominio==busqueda){
+        band=false;
+        cout<<"\nDato Encontrado!!\n"<<endl;
+        cout<<"Dominio: "<<tmp->dato.dominio<<endl;
+        tmp->dato.Setpassword(change.Getpassword());
+        cout<<"\nDato Modificado!!\n"<<endl;
+        cout<<"Dominio: "<<tmp->dato.dominio<<endl;
+        cout<<"Contraseña: "<<tmp->dato.Getpassword();
+      }
+      else{
+        tmp=tmp->Next;
+      }
+    }
+     if(!tmp){
+     cout<<"\nEse Titulo NO Existe!!\n"<<endl;      
+    }
+    Tofile();
+  }
+}
