@@ -1,6 +1,7 @@
 #ifndef LISTA_H
 #define LISTA_H
 #include "Nodo.h"
+#include"GenPass.h"
 #include <iostream>
 using namespace std;
 
@@ -24,7 +25,7 @@ void EliminarTodo(void);
 void MostrarTodo(void);
 void MostrarTodoP(void);
 
-void Encrypt(Credencial);
+//void Encrypt(GenPass,Credencial);
 
 void ModificarDom(string,Credencial);
 void ModificarUsuar(string,Credencial);

@@ -1,7 +1,8 @@
 #include <iostream>
 #include <fstream>
-#include <string.h>
+#include <string>
 #include "Lista.h"
+//#include "GenPass.h"
 using namespace std;
 
 Lista::Lista(Nodo*nextPos){
@@ -531,3 +532,6 @@ void Lista::ModificarPass(string busqueda,Credencial change){
     Tofile();
   }
 }
+
+/*void Lista::Encrypt(GenPass p1,Credencial c1){
+}*/
