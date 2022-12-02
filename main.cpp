@@ -1,4 +1,6 @@
 #include <iostream>
+#include<locale.h>
+#include"Lista.h"
 using namespace std;
 
 int main() {
