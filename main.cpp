@@ -10,7 +10,8 @@ int main() {
   //OBJETOS
   //GenPass*mainpass=new GenPass();
   Lista*list=new Lista();
-  string contra,comparar,busqueda;
+  Credencial c1,change;
+  string contra,comparar,busqueda,usuarc,passc,eliminar;
   //OPCIONES DE SWITCH
   int opcion,anws,selection;
   
@@ -23,6 +24,7 @@ int main() {
   cout<<"3.-Salir"<<endl;
   cout<<"Inserte una opcion: ";
   cin>>opcion;
+  fflush(stdin);
   switch(opcion){
     case 1:
       cout<<"¿Qué tipo de contraseña quiere realizar?"<<endl;
@@ -31,6 +33,7 @@ int main() {
       cout<<"3.-Regresar"<<endl;
       cout<<"Inserte una opcion: ";
       cin>>anws;
+      fflush(stdin);
       switch(anws){
         case 1:
           system("cls");
@@ -57,6 +60,7 @@ int main() {
       cout<<"Ingrese su contraseña:"<<endl;
       cout<<"---->: ";
       cin>>comparar;
+      fflush(stdin);
       if(){
         cout<<"Bienvenido a el menú gestor"<<endl;
         do{
@@ -64,25 +68,29 @@ int main() {
           cout<<"2.-Ver Todos los sitios Agregados"<<endl;
           cout<<"3.-Ver Todos los sitios con contraseña y usuario"<<endl;
           cout<<"4.-Buscar nombre de Sitio"<<endl;
-          cout<<"5.-Modificar contraseña de Sitio"<<end1;
-          cout<<"6.-Modificar usuario de Sitio"<<end1;
+          cout<<"5.-Modificar contraseña de Sitio"<<endl;
+          cout<<"6.-Modificar usuario de Sitio"<<endl;
           cout<<"7.-Modificar nombre de Sitio"<<endl;
           cout<<"8.-Eliminar Sitio"<<endl;
           cout<<"9.-Eliminar Todo"<<endl;
           cout<<"10.-Salir del menú gestor"<<endl;
           cout<<"Inserte una opcion: ";
           cin>>selection;
-          switch(seletion){
+          fflush(stdin);
+          switch(selection){
             case 1:
               system("cls");
               cout<<"Inserte el nombre del sitio: ";
               cin>>c1.dominio;
+              fflush(stdin);
               cout<<"Inserte su nombre de usuario de ese sitio web: ";
               cin>>usuarc;
               c1.SetUsuario(usuarc);
+              fflush(stdin);
               cout<<"Inserte su contraseña de ese sitio web: ";
               cin>>passc;
               c1.Setpassword(passc);
+              fflush(stdin);
               list->AppendL(c1);
               system("pause");
               break;
@@ -111,6 +119,7 @@ int main() {
                 system("cls");
                 cout<<"Ingrese el nombre del sitio que desee buscar: ";
                 cin>>busqueda;
+                fflush(stdin);
                 list->BuscarList(busqueda);
                 system("pause");
               }
@@ -122,22 +131,47 @@ int main() {
               break;
             case 5:
               system("cls");
-              
-              system("pause");
-              break;
-            case 6:
-              system("cls");
-              
+              cout<<"Ingrese el nombre del sitio a modificar: ";
+              cin>>busqueda;
+              fflush(stdin);
+              cout<<"Ingrese el nuevo nombre del Sitio: ";
+              cin>>change.dominio;
+              fflush(stdin);
+              //list->ModificarDom(busqueda,change);
               system("pause");
               break;
             case 7:
               system("cls");
-              
+              cout<<"Ingrese el nombre del sitio a modificar: ";
+              cin>>busqueda;
+              fflush(stdin);
+              cout<<"Ingrese el nuevo nombre del Sitio: ";
+              cin>>change.dominio;
+              fflush(stdin);
               system("pause");
               break;
-            case 8:
+            case 6:
               system("cls");
-              
+              cout<<"Ingrese el nombre del sitio donde se encuentre el usuario a modificar: ";
+              cin>>busqueda;
+              fflush(stdin);
+              cout<<"Ingrese el nuevo nombre de usuario: ";
+              cin>>usuarc;
+              change.SetUsuario(usuarc);
+              fflush(stdin);
+              //list->ModificarUsuar(busqueda,change);
+              system("pause");
+              break;
+            case 5:
+              system("cls");
+              cout<<"Ingrese el nombre del sitio donde se encuentre la ocntraseña a modificar: ";
+              cin>>busqueda;
+              fflush(stdin);
+              cout<<"Ingrese la nueva contraseña: ";
+              cin>>passc;
+              change.Setpassword(passc);
+              fflush(stdin);
+              //list->ModificarPass(busqueda,change);
               system("pause");
               break;
             case 9:
@@ -167,6 +201,14 @@ int main() {
                   system("pause");
                   break;
               }
+              break;
+            case 8:
+              system("cls");
+              cout<<"Ingrese el nombre del sitio a eliminar: ";
+              cin>>eliminar;
+              fflush(stdin);
+              list->Eliminar(eliminar);
+              system("pause");
               break;
             case 10:
               system("cls");
