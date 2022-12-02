@@ -11,3 +11,17 @@ Credencial::Credencial(){
   password=" ";
   usuario=" ";
 }
+
+void Credencial::Setpassword(string password){
+  this->password=password;
+}
+string Credencial::Getpassword(void){
+  return password;
+}
+
+void Credencial::SetUsuario(string usuario){
+  this->usuario=usuario;
+}
+string Credencial::Getusuario(void){
+  return usuario;
+}
