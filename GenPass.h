@@ -13,8 +13,8 @@ public:
 	void setcontrasenhia(string);
 	string getcontrasenhia(void);
 
-	void Manual(string);
 	void RandomPass(int);
+	void escribir();
 };
 
 #endif
