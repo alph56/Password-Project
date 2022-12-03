@@ -24,7 +24,7 @@ void Lista::AppendL(Credencial c1){
     }
     tmp->Next=aux;
   }
-  
+  Tofile();
 }
 
 void Lista::Tofile(void){
