@@ -31,6 +31,7 @@ int main() {
   switch(opcion){
     case 1:
       system("cls");
+      cout<<"Bienvenido a el menú generador de contraseñas"<<endl;
       cout<<"¿Qué tipo de contraseña quiere realizar?"<<endl;
       cout<<"1.-Generar una manualmente"<<endl;
       cout<<"2.-Generar una aleatoriamente"<<endl;
@@ -41,7 +42,7 @@ int main() {
       switch(anws){
         case 1:
           system("cls");
-          cout<<"Bienvenido a el menú generador de contraseñas"<<endl;
+          cout<<"Generar manualmente una contraseña"<<endl;
           cout<<"Ingrese una nueva contraseña"<<endl;
           cin>>mainpassword;
           fflush(stdin);
@@ -51,6 +52,7 @@ int main() {
           break;
         case 2:
           system("cls");
+          cout<<"Generar una automaticamente una contraseña"<<endl;
           cout << "Ingresa el tamaño de tu contrasena: ";
           fflush(stdin);
           cin >> lenght;
