@@ -15,6 +15,7 @@ public:
 
 	void RandomPass(int);
   void ManualPass(string);
+  int Verificador(string);
 	void escribir(void);
   void leer(void);
 };

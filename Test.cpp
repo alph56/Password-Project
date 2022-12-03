@@ -1,29 +1,30 @@
 #include<iostream>
-#include"GenPass.h"
-#include<windows.h>
 #include<stdlib.h>
+#include"GenPass.h"
+#include"Lista.h"
 
 using namespace std;
 
 int main() {
 
 	GenPass Pass;
-	string contrasenhia;
+	string mainpassword,comprobar;
 	int tam;
 
 	cout << "Manual password function" << endl;
 	cout << "Ingrese su contrasenhia: ";
-	cin >> contrasenhia;
+	cin >> mainpassword;
 	fflush(stdin);
-	Pass.Manual(contrasenhia);
+	Pass.ManualPass(mainpassword);
 	cout << "\nTu contrasena es: " << Pass.getcontrasenhia()<<endl;
-	system("pause");
-	cout << "\nRandom generator function" << endl;
-	cout << "Ingresa el tamanhio de tu contrasena: ";
+	cout<<"\n"<<endl;
+	//cout << "\nRandom generator function" << endl;
+	cout << "Ingresa la contraseña: ";
 	fflush(stdin);
-	cin >> tam;
-	Pass.RandomPass(tam);
-	cout << "\nTu contrasenhia es: " << Pass.getcontrasenhia() << endl;
+	cin >>comprobar;
+  cout<<Pass.Verificador(comprobar);
+	//Pass.RandomPass(tam);
+	//cout << "\nTu contrasenhia es: " << Pass.getcontrasenhia() << endl;
 
 	return 0;
 }

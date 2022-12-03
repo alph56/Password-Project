@@ -34,10 +34,13 @@ void GenPass::RandomPass(int lenght) {
 	}
 }
 
-void GenPass::escribir(void) {
-	ofstream password;
+void GenPass::ManualPass(string mainpassword){
+  setcontrasenhia(mainpassword);
+  escribir();
+}
 
-	password.open("Pass.txt", ios::out);
+void GenPass::escribir(void) {
+	ofstream password("Pass.txt", ios::out| ios::binary);
 	if (password.fail()) {
 		cout<<"\nNo se pudo abrir el archivo"<<endl;
 			exit(1);
@@ -55,21 +58,63 @@ void GenPass::escribir(void) {
 }
 
 void GenPass::leer(void){
-  ofstream password;
-  ifstream leerpassword;
+  ofstream password("Pass.txt", ios::out| ios::binary);
+  ifstream leerpassword("Pass.txt", ios::in | ios::binary);
   if (password.fail()) {
 		cout<<"\nNo se pudo abrir el archivo Pass.txt"<<endl;
 			exit(1);
 	}
   else{
     char *buf;
-    string str=getcontrasenhia();
-    int size1=(getcontrasenhia().size());
-    
-    leerpassword.read(reinterpret_cast<char *>(&size1), sizeof(int));
-    buf = new char[size1];
-    leerpassword.read( buf, size1);
-    getcontrasenhia()= "";
-    getcontrasenhia().append(buf, size1); 
+    while(!password.eof()){
+      string str=getcontrasenhia();
+      int size1=(getcontrasenhia().size());
+      
+      leerpassword.read(reinterpret_cast<char *>(&size1), sizeof(int));
+      buf = new char[size1];
+      leerpassword.read( buf, size1);
+      getcontrasenhia()= "";
+      getcontrasenhia().append(buf, size1);
+    }
+    escribir();
   }
+}
+
+int GenPass::Verificador(string comprobar){
+  ofstream password("Pass.txt", ios::out| ios::binary);
+  ifstream leerpassword("Pass.txt", ios::in | ios::binary);
+  int marca;
+  if (password.fail()) {
+		cout<<"\nNo se pudo abrir el archivo Pass.txt"<<endl;
+			exit(1);
+      marca=0;
+	}
+  else{
+    char *buf;
+    bool band=true;
+      while(!password.eof() and band){
+        string str=getcontrasenhia();
+        int size1=(getcontrasenhia().size());
+        
+        leerpassword.read(reinterpret_cast<char *>(&size1), sizeof(int));
+        buf = new char[size1];
+        leerpassword.read( buf, size1);
+        getcontrasenhia()= "";
+        getcontrasenhia().append(buf, size1);
+        
+        if(getcontrasenhia()==comprobar){
+            band=false;
+            marca=1;
+          }
+        else if(getcontrasenhia()!=comprobar){
+          band=true;
+          marca=0;
+        }
+      }
+    if(band==true){
+      marca=0;
+     }
+    }
+  escribir();
+  return marca;
 }
