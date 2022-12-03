@@ -13,7 +13,6 @@ GenPass::GenPass() {
 
 void GenPass::setcontrasenhia(string contrasenhia) {
 	this->contrasenhia = contrasenhia;
-	escribir();
 }
 
 string GenPass::getcontrasenhia(void) {
