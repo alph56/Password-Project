@@ -25,7 +25,8 @@ void EliminarTodo(void);
 void MostrarTodo(void);
 void MostrarTodoP(void);
 
-//void Encrypt(GenPass,Credencial);
+string EncryptPassword(string,string);
+string EncryptUsuar(string,Credencial);
 
 void ModificarDom(string,Credencial);
 void ModificarUsuar(string,Credencial);

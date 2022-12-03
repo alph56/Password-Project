@@ -1,4 +1,4 @@
-#include<iostream>
+/*#include<iostream>
 #include<stdlib.h>
 #include"GenPass.h"
 #include"Lista.h"
@@ -27,4 +27,4 @@ int main() {
 	//cout << "\nTu contrasenhia es: " << Pass.getcontrasenhia() << endl;
 
 	return 0;
-}
+}*/

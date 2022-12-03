@@ -533,5 +533,12 @@ void Lista::ModificarPass(string busqueda,Credencial change){
   }
 }
 
-/*void Lista::Encrypt(GenPass p1,Credencial c1){
-}*/
+string Lista::EncryptPassword(string temporal,string a){
+  string key=temporal;
+  string data=a;
+  string xorstring=data;
+  for(int i=0;i<xorstring.size();i++){
+    xorstring[i]=data[i]^key[i%(sizeof(key)/sizeof(char))];
+  }
+  return xorstring;
+}
