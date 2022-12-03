@@ -13,12 +13,20 @@ Nodo*head;
 void AppendL(Credencial);
 void Tofile(void);
 void LeerFile(void);
+
 void BuscarFile(string);
 void BuscarList(string);
+
 void Eliminar(string);
 void EliminarTodo(void);
+
 void MostrarTodo(void);
 void MostrarTodoP(void);
+
+void ModificarDom(string,Credencial);
+void ModificarUsuar(string,Credencial);
+void ModificarPass(string,Credencial);
+
 void Encrypt(Credencial);
 };
 
