@@ -1,23 +1,26 @@
 #include <iostream>
 #include<locale.h>
+#include<cstdlib>
 #include"Lista.h"
-//#include"GenPass.h"
+#include"GenPass.h"
 using namespace std;
 
 int main() {
   //Idioma:Español
   setlocale(LC_CTYPE, "Spanish");
   //OBJETOS
-  //GenPass*mainpass=new GenPass();
+  GenPass Pass;
   Lista*list=new Lista();
   Credencial c1,change;
-  string contra,comparar,busqueda,usuarc,passc,eliminar;
+  string mainpassword,comparar,busqueda,usuarc,passc,eliminar;
+  int lenght;
   //OPCIONES DE SWITCH
   int opcion,anws,selection;
   
   
   cout<<"----Bienvenido----"<<endl;
   do{
+  system("cls");
   cout<<"¿Qué desea hacer?"<<endl;
   cout<<"1.-Generar contraseña"<<endl;
   cout<<"2.-Ingresar al sistema"<<endl;
@@ -27,6 +30,7 @@ int main() {
   fflush(stdin);
   switch(opcion){
     case 1:
+      system("cls");
       cout<<"¿Qué tipo de contraseña quiere realizar?"<<endl;
       cout<<"1.-Generar una manualmente"<<endl;
       cout<<"2.-Generar una aleatoriamente"<<endl;
@@ -37,12 +41,21 @@ int main() {
       switch(anws){
         case 1:
           system("cls");
-          //mainpass->Manual(contra);
+          cout<<"Bienvenido a el menú generador de contraseñas"<<endl;
+          cout<<"Ingrese una nueva contraseña"<<endl;
+          cin>>mainpassword;
+          fflush(stdin);
+          Pass.ManualPass(mainpassword);
+          cout<<"Su contraseña quedó definida como: "<<Pass.getcontrasenhia()<<endl;
           system("pause");
           break;
         case 2:
           system("cls");
-          //mainpass->RandomPass(contra);
+          cout << "Ingresa el tamaño de tu contrasena: ";
+          fflush(stdin);
+          cin >> lenght;
+          Pass.RandomPass(lenght);
+          cout<<"Su contraseña quedó definida como: "<<Pass.getcontrasenhia()<<endl;
           system("pause");
           break;
         case 3:
@@ -61,9 +74,9 @@ int main() {
       cout<<"---->: ";
       cin>>comparar;
       fflush(stdin);
-      if(){
-        cout<<"Bienvenido a el menú gestor"<<endl;
+      if(Pass.Verificador(comparar)==1){
         do{
+          cout<<"Bienvenido a el menú gestor"<<endl;
           cout<<"1.-Agregar Sitio nuevo"<<endl;
           cout<<"2.-Ver Todos los sitios Agregados"<<endl;
           cout<<"3.-Ver Todos los sitios con contraseña y usuario"<<endl;
@@ -103,7 +116,8 @@ int main() {
               cout<<"Ingrese su contraseña:"<<endl;
               cout<<"---->: ";
               cin>>comparar;
-              if(){
+              fflush(stdin);
+              if(Pass.Verificador(comparar)==1){
                 system("cls");
                 list->MostrarTodo();
                 system("pause");
@@ -115,30 +129,12 @@ int main() {
               }
               break;
             case 4:
-              if(){
                 system("cls");
                 cout<<"Ingrese el nombre del sitio que desee buscar: ";
                 cin>>busqueda;
                 fflush(stdin);
                 list->BuscarList(busqueda);
                 system("pause");
-              }
-              else{
-                system("cls");
-                cout<<"contraseña Incorrecta"<<endl;
-                system("pause");
-              }
-              break;
-            case 5:
-              system("cls");
-              cout<<"Ingrese el nombre del sitio a modificar: ";
-              cin>>busqueda;
-              fflush(stdin);
-              cout<<"Ingrese el nuevo nombre del Sitio: ";
-              cin>>change.dominio;
-              fflush(stdin);
-              //list->ModificarDom(busqueda,change);
-              system("pause");
               break;
             case 7:
               system("cls");
@@ -148,6 +144,7 @@ int main() {
               cout<<"Ingrese el nuevo nombre del Sitio: ";
               cin>>change.dominio;
               fflush(stdin);
+              list->ModificarDom(busqueda,change);
               system("pause");
               break;
             case 6:
@@ -159,7 +156,7 @@ int main() {
               cin>>usuarc;
               change.SetUsuario(usuarc);
               fflush(stdin);
-              //list->ModificarUsuar(busqueda,change);
+              list->ModificarUsuar(busqueda,change);
               system("pause");
               break;
             case 5:
@@ -171,7 +168,7 @@ int main() {
               cin>>passc;
               change.Setpassword(passc);
               fflush(stdin);
-              //list->ModificarPass(busqueda,change);
+              list->ModificarPass(busqueda,change);
               system("pause");
               break;
             case 9:
